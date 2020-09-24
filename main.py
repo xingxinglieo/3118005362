@@ -36,11 +36,13 @@ def main():
     if(len(argv) < 3):
         print('参数不足，请依次输入源文件路径，对比文件路径和结果保存路径')
         exit()
-    # elif(!(os.path.exists(argv[1]) | | os.path.exists(argv[2])):
     elif(not(os.path.exists(argv[1]) and os.path.exists(argv[2]))):
         print('源文件或对比文件不存在')
         exit()
-    print(os.path.exists(argv[2]))
+    elif(os.path.getsize(argv[1]) == 0 or os.path.getsize(argv[2]) == 0){
+        print('源文件或对比文件为空')
+        exit()
+    }
     similarity = calc_similarity(read_file_to_cut(
         argv[1]), read_file_to_cut(argv[2]))
     # similarity = calc_similarity(read_file_to_cut(
@@ -49,6 +51,6 @@ def main():
     f.write("文章相似度： %.4f" % similarity)
     f.close()
     print('文章相似度：%.4f' % (similarity))
+
+
 main()
-
-
